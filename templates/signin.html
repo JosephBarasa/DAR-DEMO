@@ -12,16 +12,16 @@
     <div class="container mt-5">
         <form method="POST" action="{% url 'signin' %}">
             {% csrf_token %}
-            <div class="row">
-                <div class="col-md-6">
-                        <label for="username" class="form-label">Username</label> <br>
-                        <input type="text" class="form-control" id="username" name="username" required> <br>
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required><br>
-                    <button type="submit" class="btn btn-dark">Submit</button> 
-                </div>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
             </div>
-        </form> <br><br>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign In</button>
+        </form>        
 
         <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
     

@@ -185,3 +185,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'josephbarasa622@gmail.com'
 EMAIL_HOST_PASSWORD = 'kftqzcuudugyjdlr'
+
+DEFAULT_FROM_EMAIL = 'josephbarasa622@gmail.com'  # Replace with your email

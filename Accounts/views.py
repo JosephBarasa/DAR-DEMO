@@ -1,23 +1,15 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate, login as auth_login
-from django.http import HttpResponse, HttpResponsePermanentRedirect, HttpResponseRedirect
-from typing import Union, Any
-from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login as auth_login, logout
+from django.core.mail import send_mail
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
-from django.core.mail import send_mail
-from django.contrib.auth import login
-
 from jb1 import settings
 
-# Create your views here.
-    
-    
 # USER REGISTRATION
 
 
@@ -27,65 +19,67 @@ def register(request):
         last_name = request.POST['last_name']
         username = request.POST['username']
         email = request.POST['email']
-        password1 = request.POST['password']
-        password2 = request.POST['password']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
         
-        if password1 == password2:   
-            if User.objects.filter(username=username).exists():
-                messages.info(request, 'USERNAME TAKEN')
-                return redirect('register')
-            elif User.objects.filter(email=email).exists():
-                messages.info(request, 'EMAIL EXISTS')
-                return redirect('register')
-            else:
-                user = User.objects.create_user(first_name=first_name,
-                                                last_name=last_name,
-                                                username=username, 
-                                                email=email,
-                                                password=password1, 
-                                                )
-                user.save()
-                user.is_active = False
-                messages.info(request, 'Account has been successfully created.We have sent you a confirmation Email.Please confirm your Email in order to verify your account.')
-                return redirect('signin')
-        else:
-            messages.info(request, 'PASSWORDS NOT MATCHING')
+        if password1 != password2:
+            messages.error(request, 'Passwords do not match.')
             return redirect('register')
         
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username is taken.')
+            return redirect('register')
+        
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email is already in use.')
+            return redirect('register')
+        
+        user = User.objects.create_user(
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+            email=email,
+            password=password1
+        )
+        user.is_active = False
+        user.save()
+        send_verification_email(request, user)
+        messages.info(request, 'Account created. Please check your email to confirm your account.')
+        return redirect('signin')
     else:
         return render(request, 'register.html')
+
       
-    # USER LOGIN 
+# USER LOGIN 
 
 
-def signin(request: Any) -> Union[HttpResponseRedirect, 
-                                  HttpResponsePermanentRedirect, HttpResponse]:
+def signin(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        
-        user = authenticate(username=username, password=password)
+        username = request.POST.get('username').strip()  
+        password = request.POST.get('password').strip()
 
+        user = authenticate(username=username, password=password)
         if user is not None:
             auth_login(request, user)
-            first_name = user.first_name
-            return redirect('/', {'first_name': first_name})
+            return redirect('home')  
         else:
-            messages.info(request, 'INVALID CREDENTIALS')
+            messages.error(request, 'Invalid credentials. Please try again.')
             return redirect('signin')
-        
     else:
         return render(request, 'signin.html')
+
     
-    # USER LOGOUT
- 
     
+    
+# USER LOGOUT
+
+
 def signout(request):
     logout(request)
-    messages.info(request, 'LOGGED OUT SUCCESSFULY')
+    messages.info(request, 'You have been logged out.')
     return redirect('signin')
 
-# EMAIL VERIFIACTION
+# EMAIL VERIFICATION
 
 
 def send_verification_email(request, user):
@@ -99,20 +93,22 @@ def send_verification_email(request, user):
         'uid': uid,
         'token': token,
     })
-    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
-
+    recipient_email = user.email 
+    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [recipient_email])
+    
 
 def activate(request, uidb64, token):
     try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
+        uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
 
     if user is not None and default_token_generator.check_token(user, token):
-        user.is_active = True
+        user.is_active = False
         user.save()
-        login(request, user)
+        auth_login(request, user)
         return redirect('home')
     else:
-        return HttpResponse('Activation link is invalid!')
+        messages.error(request, 'Activation link is invalid!')
+        return redirect('signin')
