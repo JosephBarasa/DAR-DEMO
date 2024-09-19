@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -168,8 +170,9 @@ django_heroku.settings(locals())
 
 # ADDING & FETCHING DATA FROM THE DATABASE
 # Path for the media(from the database)
-
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
+CLOUDINARY_URL = os.getenv('CLOUDINARY_URL')
 
 # url to use in the views
 MEDIA_URL = '/media/'
