@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 # WEB DEPLOYMENT-HEROKU
 import django_heroku
 import dj_database_url
-
+import cloudinary_storage
 import os
 from pathlib import Path
 
@@ -20,7 +20,7 @@ from pathlib import Path
 
 # to install PyMySQL as the MySQL driver
 import pymysql
-from django.conf.global_settings import EMAIL_USE_SSL
+from django.conf.global_settings import EMAIL_USE_SSL, DEFAULT_FILE_STORAGE
 pymysql.install_as_MySQLdb()
 
 
@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
+    'cloudinary_storage'
 ]
 
 MIDDLEWARE = [
@@ -169,12 +171,14 @@ django_heroku.settings(locals())
 # ADDING & FETCHING DATA FROM THE DATABASE
 # Path for the media(from the database)
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
 
 # url to use in the views
-MEDIA_URL = '/media/'
-
-
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME' : 'hz8ydpy1v',
+    'API_KEY' : '289844854987335',
+    'API_SECRET' : 'yJiiZHEMS71FAhANesHi8fNfO_w'
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
