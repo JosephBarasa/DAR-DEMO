@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib import auth
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.core.mail import send_mail
 from django.contrib.auth.tokens import default_token_generator
@@ -21,6 +22,19 @@ def register(request):
         email = request.POST['email']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
+
+        user = User.objects.create_user(
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+            email=email,
+            password=password1
+        )
+        user.is_active = True #SET TO FALSE : so that  if the email address is not activated the user will not be able to log in to their account
+        user.save()
+        send_verification_email(request, user)
+        messages.info(request, 'Account created. Please check your email to confirm your account.')
+        return redirect('signin')
         
         if password1 != password2:
             messages.error(request, 'Passwords do not match.')
@@ -33,19 +47,7 @@ def register(request):
         if User.objects.filter(email=email).exists():
             messages.error(request, 'Email is already in use.')
             return redirect('register')
-        
-        user = User.objects.create_user(
-            first_name=first_name,
-            last_name=last_name,
-            username=username,
-            email=email,
-            password=password1
-        )
-        user.is_active = False
-        user.save()
-        send_verification_email(request, user)
-        messages.info(request, 'Account created. Please check your email to confirm your account.')
-        return redirect('signin')
+
     else:
         return render(request, 'register.html')
 
@@ -68,16 +70,14 @@ def signin(request):
     else:
         return render(request, 'signin.html')
 
-    
-    
-    
+
+
+
 # USER LOGOUT
 
-
 def signout(request):
-    logout(request)
-    messages.info(request, 'You have been logged out.')
-    return redirect('signin')
+    auth.logout(request)
+    return redirect('/')
 
 # EMAIL VERIFICATION
 
@@ -112,3 +112,7 @@ def activate(request, uidb64, token):
     else:
         messages.error(request, 'Activation link is invalid!')
         return redirect('signin')
+
+
+def home(request):
+    return render(request, 'index.html')

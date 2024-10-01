@@ -1,10 +1,5 @@
 from django.db import models
 
-# Create your models here
-
-
-# Canvas & Bottle Paintings Class
-    
     
 class OtherImages(models.Model):
     image = models.ImageField(upload_to='otherImages')

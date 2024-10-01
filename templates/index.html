@@ -53,12 +53,11 @@
           <li><a href="#store">Store</a></li>
           <li><a href="#artists">Artists</a></li>
           <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav><!-- .navbar -->
 
       {% if user.is_authenticated %}
-      <a type="button" class="btn btn-dark" href="Accounts/signin">Sign Out</a>
+      <a type="button" class="btn btn-dark" href="Accounts/signout">Sign Out</a>
       {% else %}
       <a class="btn btn-dark" href="Accounts/register">Sign Up</a>
       <a class="btn btn-dark" href="Accounts/signin">Sign In</a>
@@ -83,7 +82,7 @@
           <p data-aos="fade-up" data-aos-delay="100">
             Start your art journey here
           </p>
-          <h1 data-aos="fade-up">Discover art crafted with passion and explore our diverse collection</h1>
+          <h1 data-aos="fade-up">Discover art crafted with passion and explore our diverse, affordable collection.</h1>
        </div>
       
         {% for otherImages in otherImages %}
@@ -362,61 +361,9 @@
 
       </div>
     </section><!-- End Gallery Section -->
-
-
-    <!-- ======= CONTACT SECTION ======= -->
-    <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-header">
-          <h2>Contact</h2>
-          <p>Talk To Us</p>
-        </div>
-        <div class="row gy-4">
-          <!-- End Info Item -->
-
-          <div class="col-md-6">
-            <div class="info-item d-flex align-items-center">
-              <i class="icon bi bi-envelope flex-shrink-0"></i>
-              <div>
-                <h3>Email </h3>
-                <p>josephbarasa622@gmail.com</p>
-              </div>
-            </div>
-          </div><!-- End Info Item -->
-
-          <div class="col-md-6">
-            <div class="info-item  d-flex align-items-center">
-              <i class="icon bi bi-telephone flex-shrink-0"></i>
-              <div>
-                <h3>Call </h3>
-                <p>+254 790463858</p>
-              </div>
-            </div>
-          </div><!-- End Info Item -->
-
-        </div>
-
-        <form action="{% url 'home' %}" method="post" role="form" class="php-email-form p-3 p-md-4">
-          {% csrf_token %}
-          <div class="row">
-          <div class="form-group">
-            <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-          </div>
-          <div class="my-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your message has been sent. Thank you!</div>
-          </div>
-          <div class="text-center"><button type="submit">Send Message</button></div>
-        </form><!--End Contact Form -->
-
-      </div>
-    </section><!-- End Contact Section -->
-
   </main><!-- End #main -->
 
-  <!-- ======= Footer ======= -->
+  <!-- ======= FOOTER ======= -->
 
   <footer id="footer" class="footer">
 

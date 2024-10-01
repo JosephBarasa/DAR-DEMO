@@ -33,8 +33,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #  For production, use an SMTP server
 
 
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -96,28 +94,28 @@ WSGI_APPLICATION = 'jb1.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tg6no1nkrnpqtr97',
-        'USER': 'vbodoc5mk2il13ep',
-        'PASSWORD': 'du5hiaikinmzyb1c',
-        'HOST': 'fugfonv8odxxolj8.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',  
-        'PORT': '3306',
-    }
-}
-
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'jbartsweb',
-#         'USER': 'jb',
-#         'PASSWORD': 'jbarts',
-#         'HOST': 'localhost',  
+#         'NAME': 'tg6no1nkrnpqtr97',
+#         'USER': 'vbodoc5mk2il13ep',
+#         'PASSWORD': 'du5hiaikinmzyb1c',
+#         'HOST': 'fugfonv8odxxolj8.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
 #         'PORT': '3306',
 #     }
 # }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'jbartsweb',
+        'USER': 'jb',
+        'PASSWORD': 'jbarts',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
 
 
 # Password validation
@@ -165,20 +163,23 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_files_django')
 django_heroku.settings(locals())
 
 
-
-
-
+#LOCAL STORAGE
 # ADDING & FETCHING DATA FROM THE DATABASE
 # Path for the media(from the database)
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
-# url to use in the views
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME' : 'hz8ydpy1v',
-    'API_KEY' : '289844854987335',
-    'API_SECRET' : 'yJiiZHEMS71FAhANesHi8fNfO_w'
-}
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+#CLOUD STARAGE
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME' : 'hz8ydpy1v',
+#     'API_KEY' : '289844854987335',
+#     'API_SECRET' : 'yJiiZHEMS71FAhANesHi8fNfO_w'
+# }
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
