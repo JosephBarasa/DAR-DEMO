@@ -11,6 +11,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from jb1 import settings
 
+
 # USER REGISTRATION
 
 
@@ -23,6 +24,22 @@ def register(request):
         password1 = request.POST['password1']
         password2 = request.POST['password2']
 
+        # Check if passwords match
+        if password1 != password2:
+            messages.error(request, 'Passwords do not match.')
+            return redirect('register')
+
+        # Check if username is already taken
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username is taken.')
+            return redirect('register')
+
+        # Check if email is already in use
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email is already in use.')
+            return redirect('register')
+
+        # Create the user if no issues
         user = User.objects.create_user(
             first_name=first_name,
             last_name=last_name,
@@ -30,30 +47,21 @@ def register(request):
             email=email,
             password=password1
         )
-        user.is_active = True #SET TO FALSE : so that  if the email address is not activated the user will not be able to log in to their account
+        user.is_active = True  # Set to False until email is verified
         user.save()
-        send_verification_email(request, user)
-        messages.info(request, 'Account created. Please check your email to confirm your account.')
-        return redirect('signin')
-        
-        if password1 != password2:
-            messages.error(request, 'Passwords do not match.')
-            return redirect('register')
-        
-        if User.objects.filter(username=username).exists():
-            messages.error(request, 'Username is taken.')
-            return redirect('register')
-        
-        if User.objects.filter(email=email).exists():
-            messages.error(request, 'Email is already in use.')
-            return redirect('register')
 
+        # Send email verification
+        send_verification_email(request, user)
+
+        # Display success message
+        messages.success(request, f'Hello {user.first_name} {user.last_name}, your account has been created. Please check your email to verify your account.')
+        return redirect('signin')
     else:
         return render(request, 'register.html')
 
+
       
 # USER LOGIN 
-
 
 def signin(request):
     if request.method == 'POST':
@@ -70,17 +78,19 @@ def signin(request):
     else:
         return render(request, 'signin.html')
 
-
-
-
 # USER LOGOUT
 
+# def signout(request):
+#     auth.logout(request)
+#     return redirect('/')
+
 def signout(request):
-    auth.logout(request)
+    logout(request)
     return redirect('/')
 
-# EMAIL VERIFICATION
 
+
+# EMAIL VERIFICATION
 
 def send_verification_email(request, user):
     token = default_token_generator.make_token(user)
@@ -93,9 +103,9 @@ def send_verification_email(request, user):
         'uid': uid,
         'token': token,
     })
-    recipient_email = user.email 
+    recipient_email = user.email
     send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [recipient_email])
-    
+
 
 def activate(request, uidb64, token):
     try:
@@ -105,14 +115,19 @@ def activate(request, uidb64, token):
         user = None
 
     if user is not None and default_token_generator.check_token(user, token):
-        user.is_active = False
+        user.is_active = True  # Activate the user's account
         user.save()
         auth_login(request, user)
+        messages.success(request, 'Your account has been activated successfully!')
         return redirect('home')
     else:
         messages.error(request, 'Activation link is invalid!')
         return redirect('signin')
 
 
-def home(request):
-    return render(request, 'index.html')
+
+
+    
+
+
+

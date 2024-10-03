@@ -183,6 +183,8 @@ MEDIA_URL = '/media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
+# EMAIL BACKEND
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -191,4 +193,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'josephbarasa622@gmail.com'
 EMAIL_HOST_PASSWORD = 'kftqzcuudugyjdlr'
 
-DEFAULT_FROM_EMAIL = 'josephbarasa622@gmail.com'  # Replace with your email
+DEFAULT_FROM_EMAIL = 'josephbarasa622@gmail.com'
+

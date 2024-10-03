@@ -8,7 +8,7 @@
 
     <div class="container mt-5">
         <div class="text-center">
-            <h3 cass="text-center">{{user.first_name}}, you are purchasing : <strong><em>{{ product.name }}</em></strong></h3>
+            <h3 cass="text-center">{{user.first_name|upper}}, you are purchasing : <strong><em>{{ product.name }}</em></strong></h3>
         </div>
         <form method="post" action="">
             {% csrf_token %}
@@ -21,8 +21,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Name : {{ product.name }}</h5>
                             <p class="card-text">Price : Kshs.{{ product.price }} </p>
-                            <!-- <p class="card-text">Quantity : {{ order.quantity }}</p> -->
-                            <p class="card-text"><strong><em>About {{ product.name }} :</em></strong></p>
+                            <button type="submit" class="btn btn-dark">Make Payment</button>
                         </div>
                     </div>
                  </div>

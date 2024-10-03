@@ -24,7 +24,7 @@ admin.site.index_title="JB ARTS"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("Home.urls")),
-    path('Accounts/', include("Accounts.urls"))
+    path('Accounts/', include("Accounts.urls")),
 ]
 
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

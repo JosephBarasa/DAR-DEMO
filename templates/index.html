@@ -12,6 +12,10 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href=" {% static 'https://fonts.googleapis.com' %}">
@@ -43,18 +47,16 @@
   <header id="header" class="header fixed-top d-flex">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
-        <h1><small>2002</small></h1>
-      </a>
+        <strong><em><small>JB ARTS</small></em></strong>
 
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="#">Home</a></li>
           <li><a href="#store">Store</a></li>
-          <li><a href="#artists">Artists</a></li>
+          <!-- <li><a href="#artists">Artists</a></li> -->
           <li><a href="#gallery">Gallery</a></li>
         </ul>
-      </nav><!-- .navbar -->
+      </nav>
 
       {% if user.is_authenticated %}
       <a type="button" class="btn btn-dark" href="Accounts/signout">Sign Out</a>
@@ -82,7 +84,7 @@
           <p data-aos="fade-up" data-aos-delay="100">
             Start your art journey here
           </p>
-          <h1 data-aos="fade-up">Discover art crafted with passion and explore our diverse, affordable collection.</h1>
+          <h3 data-aos="fade-up">Discover art crafted with passion and explore our diverse, affordable collection.</h3>
        </div>
       
         {% for otherImages in otherImages %}
@@ -96,15 +98,16 @@
   </section><!-- End Hero Section -->
 
   <main id="main">
+
     <!-- ======= Why Us Section ======= -->
-    <section id="why-us" class="why-us section-bg">
+
+    <section id="why-us" class="why-us">
       <div class="container" data-aos="fade-up">
-        <!-- <div class="text-center"><h3>But honestly, why is Alusa topless?</h3></div><br><br><br> -->
         <div class="row gy-4">
 
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
             <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-              <i class="bi bi-recycle"></i>
+              <i style="color: black" class="bi bi-recycle"></i>
               <h4><em><strong>CREATIVITY & CONSERVATION</strong></em></h4>
             </div>
           </div>
@@ -114,12 +117,9 @@
 
               <div class="col-xl-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                  <i class="bi bi-easel-fill"></i>
+                  <i style="color: black" class="bi bi-easel-fill"></i>
                   <h4>Canvas Art</h4>
-                  <p>Crafted with love, our premium canvases are more than just surfaces; they are the beginnings of
-                    dreams,
-                    the expressions of emotions, and the reflections of your soul.Our collection features a stunning
-                    array of <strong><em> African art</em></strong>,
+                  <p>Crafted with love, our premium canvases are more than surfaces; they are the start of dreams, expressions of emotions, and reflections of your soul. Our collection features a stunning array of <strong><em> African art</em></strong>,
                     <strong><em>Abstract art</em></strong>, <strong><em>Landscape Paintings</em></strong> and many more.
                   </p>
                 </div>
@@ -127,26 +127,20 @@
 
               <div class="col-xl-4" data-aos="fade-up" data-aos-delay="300">
                 <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                  <i class="bi bi-bag-fill"></i>
+                  <i style="color: black" class="bi bi-bag-fill"></i>
                   <h4>Bottle Art</h4>
                   <p>
-                    Imbued with personal stories, our bottle art pieces resonate with a profound sense of creativity
-                    and passion.Our commitment to <strong><em>environmental conservation</em></strong> is woven into
-                    every bottle art creation.
-                    By upcycling and repurposing glass bottles, we breathe new life into discarded materials, reducing
-                    waste and leaving a positive impact on our planet.
+                    Imbued with personal stories, our bottle art pieces resonate with creativity and passion. Our commitment to <strong><em>environmental conservation</em></strong> is woven into every creation. By upcycling and repurposing glass bottles, we breathe new life into discarded materials, reducing waste and positively impacting our planet.
                   </p>
                 </div>
               </div><!-- End Icon Box -->
 
               <div class="col-xl-4" data-aos="fade-up" data-aos-delay="300">
                 <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                  <i class="bi bi-person-bounding-box"></i>
+                  <i style="color: black" class="bi bi-person-bounding-box"></i>
                   <h4>Portrait Art</h4>
                   <p>
-                    Our portrait art pieces, like vessels filled with <strong><em>personal stories</em></strong>, resonate 
-                    with a profound sense of creativity and passion.We take <strong><em>commissioned portraits</em></strong>,
-                    allowing you to have a personalized piece that encapsulates your unique story and character.
+                    Our portrait art pieces, like vessels filled with <strong><em>personal stories</em></strong>, resonate with creativity and passion. We create <strong><em>commissioned portraits</em></strong>, allowing you to have a personalized piece that captures your unique story and character.
                   </p>
                 </div>
               </div><!-- End Icon Box -->
@@ -164,20 +158,20 @@
 
         <div class="section-header">
           <h2>Fair Prices</h2>
-          <p>Check Out Our Store</p>
+          <p>In Store</p>
         </div>
 
         <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
 
           <li class="nav-item">
             <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-starters">
-              <h4>Canvas Paintings</h4>
+              <h4 style="color: black">Canvas Paintings</h4>
             </a>
           </li><!-- End tab nav item -->
 
-          <li class="nav-item">
+          <li class="nav-item" >
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-breakfast">
-              <h4>Bottle Paintings</h4>
+              <h4 style="color: black">Bottle Paintings</h4>
             </a><!-- End tab nav item -->
 
         </ul>
@@ -191,7 +185,7 @@
           <div class="tab-pane fade active show" id="menu-starters">
 
             <div class="tab-header text-center text-dark">
-              <h3>Canvas Paintings</h3>
+              <h3 style="color: black" >Canvas Paintings</h3>
             </div>
 
             <div class="row gy-5">
@@ -204,19 +198,18 @@
                 <a href="{{canvas.image.url}}" class="glightbox"><img src="{{canvas.image.url}}"
                     class="menu-img img-fluid" alt=""></a>
                 <h4>{{canvas.name}}</h4>
-                <p class="ingredients">
-                  {{canvas.description}}
-                </p>
-                <p class="ingredients">
+                <p class=" text-dark">
                   Medium : {{canvas.medium}}
                 </p>
-                <p class="ingredients">
+                <p class=" text-dark">
                   Size : {{canvas.size}}
                 </p>
                 <p class=" text-dark">
                   Kshs. {{canvas.price}}
                 </p>
-                <!-- <a type="button" class="btn btn-dark" href="Home/checkout">Order</a> -->
+                <div class="section-header">
+                  <h2>Only</h2>
+                </div>
                 <a type="button" class="btn btn-dark" href="{% url 'checkout' 'canvas' canvas.id %}">Buy</a>
               </div>
               {% endfor %}
@@ -228,7 +221,7 @@
           <div class="tab-pane fade" id="menu-breakfast">
 
             <div class="tab-header text-center">
-              <h3>Bottle Paintings</h3>
+              <h3 style="color: black">Bottle Paintings</h3>
             </div>
 
             <div class="row gy-5">
@@ -239,16 +232,15 @@
                 <a href="{{bottle.image.url}}" class="glightbox"><img src="{{bottle.image.url}}"
                     class="menu-img img-fluid" alt=""></a>
                 <h4>{{bottle.name}}</h4>
-                <p class="ingredients">
-                  {{bottle.description}}
-                </p>
                 <p class="text-dark">
                   Medium : {{bottle.medium}}
                 </p>
                 <p class="text-dark">
                   Kshs. {{bottle.price}}
                 </p>
-                <!-- <a type="button" class="btn btn-dark" href="Home/checkout">Order</a> -->
+                <div class="section-header">
+                  <h2>Only</h2>
+                </div>
                 <a type="button" class="btn btn-dark" href="{% url 'checkout' 'bottle' bottle.id %}">Buy</a>
               </div><!-- Menu Item -->
               {% endfor %}
@@ -260,14 +252,14 @@
       </div>
     </section>
 
-    <section id="testimonials" class="testimonials section-bg">
+    <section id="testimonials" class="testimonials">
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
           <h2>Testimonials</h2>
           <p>From Our Esteemed Clients</p>
         </div>
-        <div class="slides-1 swiper" data-aos="fade-up" data-aos-delay="100">
+        <div style="color:black" class="slides-1 swiper" data-aos="fade-up" data-aos-delay="100">
           <div class="swiper-wrapper">
             {% for testimonial in testimonial %}
             <div class="swiper-slide">
@@ -276,15 +268,18 @@
                   <div class="col-lg-6">
                     <div class="testimonial-content">
                       <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
+                        <i style="color:black" class="bi bi-quote quote-icon-left"></i>
                         {{testimonial.testimonial}}
-                        <i class="bi bi-quote quote-icon-right"></i>
+                        <i style="color:black" class="bi bi-quote quote-icon-right"></i>
                       </p>
                       <h3>{{testimonial.name}}</h3>
                       <h4>{{testimonial.description}}</h4>
                       <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                          class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                        <i style="color:black" class="bi bi-star-fill"></i>
+                        <i style="color:black" class="bi bi-star-fill"></i>
+                        <i style="color:black" class="bi bi-star-fill"></i>
+                        <i style="color:black" class="bi bi-star-fill"></i>
+                        <i style="color:black" class="bi bi-star-fill"></i>
                       </div>
                     </div>
                   </div>
@@ -304,7 +299,7 @@
 
     <!-- ======= ARTISTS SECTION ======= -->
 
-    <section id="artists" class="chefs section-bg">
+    <!-- <section id="artists" class="chefs">
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
@@ -331,17 +326,17 @@
               </div>
               <a class="btn-book-a-table" href="">Learn More About {{artist.name}}</a>
             </div>
-          </div><!-- End The Artist -->
+          </div>
           {% endfor %}
         </div>
 
       </div>
-    </section><!-- End Artists Section -->
+    </section> -->
 
 
     <!-- ======= GALLERY SECTION ======= -->
 
-    <section id="gallery" class="gallery section-bg">
+    <section id="gallery" class="gallery">
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">

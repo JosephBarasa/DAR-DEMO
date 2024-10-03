@@ -8,7 +8,6 @@ class OtherImages(models.Model):
 class Canvas(models.Model):
     image = models.ImageField(upload_to='prodpics')
     name = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
     medium = models.CharField(max_length=100)
     size = models.CharField(max_length=50)
@@ -17,7 +16,6 @@ class Canvas(models.Model):
 class Bottles(models.Model):
     image = models.ImageField(upload_to='prodpics')
     name = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
     medium = models.CharField(max_length=100)
     
@@ -51,7 +49,6 @@ class Order(models.Model):
     phone = models.CharField(max_length=30, default='254')
     email = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
-    quantity = models.PositiveIntegerField(default=1)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     
 
